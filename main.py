@@ -26,7 +26,7 @@ def parse_file(filename):
         id = ""
         for data_element in node_element.getElementsByTagName("data"):
             if key_for_node_map[data_element.getAttribute("key")] == "label":
-                name = data_element.firstChild.data
+                name = "-".join(data_element.firstChild.data.split(" "))
             elif key_for_node_map[data_element.getAttribute("key")] == "id":
                 id = data_element.firstChild.data
         node_map[id] = Node(name)
@@ -60,5 +60,6 @@ def _get_dom(filename) -> xml.dom.minidom.Element:
 
 
 if __name__ == "__main__":
-    parse_files(DIRNAME, OUT_DIRNAME)
+    for i in range(1, 13):
+        parse_files(DIRNAME+str(i), OUT_DIRNAME+str(i))
 
